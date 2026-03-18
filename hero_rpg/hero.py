@@ -31,9 +31,49 @@ class Hero:
     """
 
     def __init__(self, name: str, hero_class: str, max_health: int = 100) -> None:
-        pass
+        
+    # -- Identity ------------------------------------------------------------   
 
-    # ── Health ────────────────────────────────────────────────────────────────
+        self.name = name
+        self.hero_class: str = hero_class
+        self.max_health: int = max_health
+        self.health: int = max_health
+
+    # -- Bag/Inventory -------------------------------------------------------
+    # -- Bag 1: For potions, armor, etc --------------------------------------
+        
+        self.inventory: Bag[Weapon] = Bag(Capacity = 20)
+
+    # -- Bag 2: Only For Weapons ---------------------------------------------
+
+        self.inventory: Bag[Weapon] = Bag(capacity = 3)
+
+    # -- Skills --------------------------------------------------------------
+
+        self.skills: set[str] = set()
+
+    # -- Statistics ----------------------------------------------------------
+
+        self.stats: dict[str, int] = {
+            "strength": 10,
+            "dexterity": 10,
+            "intelligence": 10,
+            "defense": 5
+        }
+
+    # -- Kill Counter -------------------------------------------------------------
+
+        self.kill_counter: Counter[str] = Counter()
+
+    # -- Item Registry ------------------------------------------------------------
+
+        self.item_registry: defaultdict[str, list[Item]] = defaultdict(list)
+
+    # ── Combat Log ────────────────────────────────────────────────────────────────
+
+        self.combat_log: deque[str] = deque(maxlen=10)
+
+    # -- Health --------------------------------------------------------------------
 
     def take_damage(self, amount: int) -> int:
         """
@@ -42,7 +82,7 @@ class Hero:
         Returns:
             Actual HP lost (may be less than `amount` near death).
         """
-        pass
+
 
     def heal(self, amount: int) -> int:
         """
